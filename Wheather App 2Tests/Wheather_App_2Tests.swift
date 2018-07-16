@@ -9,11 +9,11 @@
 import XCTest
 @testable import Wheather_App_2
 
-class Wheather_App_2Tests: XCTestCase {
+class WheatherApp2Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
     
     override func tearDown() {
