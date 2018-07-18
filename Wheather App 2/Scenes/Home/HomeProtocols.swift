@@ -14,6 +14,8 @@ import UIKit
 protocol HomeViewControllerProtocol: BaseViewControllerProtocol {
     
     func setCurrentWeatherLabel(currentWeather: WeatherModel)
+    func reloadTableView()
+    func deleteTableRow(indexPaths: [IndexPath])
 }
 
 // MARK: - Presenter
@@ -21,11 +23,19 @@ protocol HomeViewControllerProtocol: BaseViewControllerProtocol {
 protocol HomePresenterViewProtocol: BasePresenterViewProtocol {
     
     func getCurrrentWeather(lat: Double, lon: Double)
+    func getBookmarks()
+    func getBookmarksCount() -> Int
+    func getBookmarkAt(index: Int) -> WeatherModel?
+    func getLocationAt(index: Int) -> Location?
+    func filterBookmarks(searchText: String)
+    func deleteBookmark(index: Int)
 }
 
 protocol HomePresenterInteractorProtocol: BasePresenterInteractorProtocol {
     
     func setCurrentWeather(currentWeather: WeatherModel)
+    func getBookmarkWeathers(bookmarks: [Location])
+    func addToBookmarkWeathers(weather: WeatherModel, index: Int)
 }
 
 protocol HomePresenterDelegateProtocol: BasePresenterDelegateProtocol {
@@ -37,4 +47,7 @@ protocol HomePresenterDelegateProtocol: BasePresenterDelegateProtocol {
 protocol HomeInteractorProtocol: BaseInteractorProtocol {
     
     func getCurrrentWeather(lat: Double, lon: Double)
+    func getBookmarks()
+    func fetchBookmarkWeathers(bookmarks: [Location])
+    func deleteLocation(location: Location)
 }

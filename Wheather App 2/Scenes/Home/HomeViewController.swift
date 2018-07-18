@@ -10,6 +10,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 class HomeViewController: BaseViewController {
     
@@ -27,18 +28,42 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var windImageView: UIImageView!
     @IBOutlet weak var humidityImageView: UIImageView!
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     // MARK: - Dependencies
     
     var presenter: HomePresenterViewProtocol!
+    
+    var lat = 0.0
+    var lon = 0.0
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.white
+        
+        return refreshControl
+    }()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UserDefaults.standard.set("metric", forKey: "unit")
-        
+
         requestLocation()
+        self.tableView.addSubview(self.refreshControl)
+
+        showPopUpRating()
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if lat != 0.0 && lon != 0.0 {
+            presenter.getCurrrentWeather(lat: lat, lon: lon)
+        }
+        presenter.getBookmarks()
     }
     
     // MARK: - Configure
@@ -47,6 +72,8 @@ class HomeViewController: BaseViewController {
         super.configureView()
         
         self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(displayAddBookmarkView)), animated: true)
+        
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(displaySettingsView)), animated: true)
         
         self.cityLabel.text = ""
         self.degreeLabel.text = ""
@@ -62,6 +89,17 @@ class HomeViewController: BaseViewController {
     // MARK: - Initialization
     let locationManager: CLLocationManager = CLLocationManager()
     
+    func showPopUpRating() {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            let ratingViewController = RatingPopUpViewController()
+            ratingViewController.ratingDelegate = self
+            ratingViewController.modalPresentationStyle = .overCurrentContext
+            ratingViewController.modalTransitionStyle = .crossDissolve
+            self.present(ratingViewController, animated: true, completion: nil)
+        })
+    }
+    
     func requestLocation() {
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -70,16 +108,36 @@ class HomeViewController: BaseViewController {
             locationManager.startUpdatingLocation()
         }
     }
-    
+        
+    // MARK: - Actions
+
     @objc func displayAddBookmarkView() {
         
         if let navigationController = self.navigationController {
-            
             AddBookmarkWireframe().show(transitionType: .push(navigationController: navigationController), extras: nil)
         }
     }
-    // MARK: - Actions
-
+    
+    @objc func displaySettingsView() {
+        
+        if let navigationController = self.navigationController {
+            let sVC = UIStoryboard.init(name: "Home", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsViewController")
+            if let settingsVC = sVC as? SettingsViewController {
+                navigationController.pushViewController(settingsVC, animated: true)
+            }
+        }
+    }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        searchBar.text = ""
+        presenter.getBookmarks()
+        refreshControl.endRefreshing()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.view.endEditing(true)
+    }
 }
 
 // MARK: - Extensions
@@ -88,8 +146,8 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let lon = location.coordinate.longitude
-            let lat = location.coordinate.latitude
+            lon = location.coordinate.longitude
+            lat = location.coordinate.latitude
         
             presenter.getCurrrentWeather(lat: lat, lon: lon)
             manager.stopUpdatingLocation()
@@ -112,5 +170,77 @@ extension HomeViewController: HomeViewControllerProtocol {
         self.humidityLabel.text = currentWeather.humidity.description
         self.windImageView.alpha = 1
         self.humidityImageView.alpha = 1
+        
+        UIView.transition(with: self.backgroundImageView,
+                          duration: 1,
+                          options: .transitionCrossDissolve,
+                          animations: {self.backgroundImageView.image = currentWeather.image },
+                          completion: nil)
+    }
+    
+    func reloadTableView() {
+        tableView.reloadData()
+    }
+    
+    func deleteTableRow(indexPaths: [IndexPath]) {
+        tableView.deleteRows(at: indexPaths, with: .fade)
+    }
+    
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.getBookmarksCount()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        if let weather = presenter.getBookmarkAt(index: indexPath.row) {
+            if weather.name != "" {
+                cell.textLabel?.text = weather.name
+            } else {
+                cell.textLabel?.text = "Unknown Location"
+            }
+            cell.detailTextLabel?.text = "\(weather.degree.description)\(weather.unit.description)"
+        }
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            presenter.deleteBookmark(index: indexPath.row)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let wheather = presenter.getBookmarkAt(index: indexPath.row) {
+            if let location = presenter.getLocationAt(index: indexPath.row) {
+                let extras = DetailsExtras(location, wheather)
+                if let navigationController = self.navigationController {
+                    DetailsWireframe().show(transitionType: .push(navigationController: navigationController), extras: extras)
+                }
+            }
+        }
+    }
+}
+
+extension HomeViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.filterBookmarks(searchText: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
+
+extension HomeViewController: RatingPopUpViewControllerDelegate {
+    
+    func didTapSendButton(rating: Int) {
+        print(rating)
     }
 }

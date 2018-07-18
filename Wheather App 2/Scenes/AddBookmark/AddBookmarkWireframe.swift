@@ -14,7 +14,7 @@ class AddBookmarkWireframe: BaseWireframe {
     func show(transitionType: WireframeTransitionType, delegate: AddBookmarkPresenterDelegateProtocol? = nil, extras: Any? = nil) {
         let viewController: AddBookmarkViewController = UIStoryboard.home.instantiateViewController()
         
-        let interactor = AddBookmarkInteractor()
+        let interactor = AddBookmarkInteractor(coreDataService: CoreDataService.sharedInstance)
         
         let presenter = AddBookmarkPresenter(viewController: viewController, interactor: interactor, delegate: delegate, extras: extras)
         

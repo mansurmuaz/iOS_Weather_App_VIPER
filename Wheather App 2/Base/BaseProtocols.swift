@@ -16,7 +16,7 @@ protocol BaseViewControllerProtocol: class {
     func showReachability()
     func showSplash()
     func reloadTableView()
-    
+    func deleteTableRow(indexPaths: [IndexPath])
 }
 
 // MARK: - Presenter
@@ -51,7 +51,7 @@ extension BaseViewControllerProtocol {
     func showReachability() { }
     func showSplash() { }
     func reloadTableView() { }
-    
+    func deleteTableRow(indexPaths: [IndexPath]) { }
 }
 
 // MARK: Presenter

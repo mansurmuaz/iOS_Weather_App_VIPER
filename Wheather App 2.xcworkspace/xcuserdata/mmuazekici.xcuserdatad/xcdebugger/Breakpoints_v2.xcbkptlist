@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wheather App 2/Scenes/Home/HomeInteractor.swift"
-            timestampString = "553442725.319697"
+            timestampString = "553607604.768926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "getCurrrentWeather(lat:lon:)"
             landmarkType = "7">
          </BreakpointContent>

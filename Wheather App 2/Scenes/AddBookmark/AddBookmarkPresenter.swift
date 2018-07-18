@@ -16,7 +16,7 @@ class AddBookmarkPresenter: BasePresenter {
     
     fileprivate var viewController: AddBookmarkViewControllerProtocol!
     fileprivate var interactor: AddBookmarkInteractorProtocol!
-    fileprivate var delegate: AddBookmarkPresenterDelegateProtocol?
+    fileprivate weak var delegate: AddBookmarkPresenterDelegateProtocol?
     
     // MARK: - Extras
     
@@ -44,13 +44,18 @@ class AddBookmarkPresenter: BasePresenter {
 
 extension AddBookmarkPresenter: AddBookmarkPresenterViewProtocol {
     
+    func saveLocation(latitude: Double, longitude: Double) {
+        interactor.saveLocation(latitude: latitude, longitude: longitude)
+    }
 }
 
 // MARK: Interactor Protocol
 
 extension AddBookmarkPresenter: AddBookmarkPresenterInteractorProtocol {
     
+    func dismissView() {
+        viewController.dismissView()
+    }
 }
 
 // MARK: Delegate Protocol
-

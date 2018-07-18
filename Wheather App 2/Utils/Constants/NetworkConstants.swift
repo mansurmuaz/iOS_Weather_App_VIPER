@@ -14,5 +14,8 @@ struct NetworkConstants {
     static let apiKey = "5393eb001d6f5b930af18785a01fa6f3"
 
     static let weather = NetworkConstants.baseUrl + "/weather"
+    static let forecast = NetworkConstants.baseUrl + "/forecast"
     
+    var unit = "metric"
+ 
 }

@@ -12,17 +12,20 @@ import UIKit
 // MARK: - View Controller
 
 protocol AddBookmarkViewControllerProtocol: BaseViewControllerProtocol {
-    
+ 
+    func dismissView()
 }
 
 // MARK: - Presenter
 
 protocol AddBookmarkPresenterViewProtocol: BasePresenterViewProtocol {
     
+    func saveLocation(latitude: Double, longitude: Double)
 }
 
 protocol AddBookmarkPresenterInteractorProtocol: BasePresenterInteractorProtocol {
     
+    func dismissView()
 }
 
 protocol AddBookmarkPresenterDelegateProtocol: BasePresenterDelegateProtocol {
@@ -33,4 +36,5 @@ protocol AddBookmarkPresenterDelegateProtocol: BasePresenterDelegateProtocol {
 
 protocol AddBookmarkInteractorProtocol: BaseInteractorProtocol {
     
+    func saveLocation(latitude: Double, longitude: Double)
 }

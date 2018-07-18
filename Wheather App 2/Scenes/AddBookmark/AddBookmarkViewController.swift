@@ -26,12 +26,8 @@ class AddBookmarkViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-            self.mapView.showsUserLocation = true
-        }
+        setLocation()
+        
     }
     
     // MARK: - Configure
@@ -39,23 +35,98 @@ class AddBookmarkViewController: BaseViewController {
     override func configureView() {
         super.configureView()
         
+        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped)), animated: true)
+        
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(press:)))
+        
+        mapView.addGestureRecognizer(longPressGestureRecognizer)
+        
     }
     
     // MARK: - Initialization
     let locationManager: CLLocationManager = CLLocationManager()
     
+    @objc func saveButtonTapped() {
+        
+        if mapView.annotations.count > 1 {
+            
+            for annotation in mapView.annotations where annotation.title != "My Location" {
+
+                let latitude = annotation.coordinate.latitude
+                let longitude = annotation.coordinate.longitude
+                
+                presenter.saveLocation(latitude: latitude, longitude: longitude)
+            }
+        } else {
+            print("add annotation alert")
+        }
+    }
+    
+    @objc func addAnnotation(press: UILongPressGestureRecognizer) {
+        
+        if press.state == .began {
+        
+            mapView.removeAnnotations(mapView.annotations)
+    
+            let pressedLocation = press.location(in: mapView)
+            let coordinates = mapView.convert(pressedLocation, toCoordinateFrom: mapView)
+            let location = CLLocation.init( latitude: coordinates.latitude, longitude: coordinates.longitude)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinates
+            
+            CLGeocoder().reverseGeocodeLocation(location) { (placemark, error) in
+                if error != nil {
+                    print(error.debugDescription)
+                } else {
+                    if let place = placemark?[0] {
+                        if let locality = place.locality {
+                            annotation.title = locality
+                        }
+                    }
+                }
+            }
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    func setLocation() {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+            self.mapView.showsUserLocation = true
+        }
+    }
     // MARK: - Actions
     
 }
 
 // MARK: - Extensions
+extension AddBookmarkViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if let location = locations.first {
+            let lon = location.coordinate.longitude
+            let lat = location.coordinate.latitude
+            
+            let location = CLLocationCoordinate2DMake(lat, lon)
+            let span = MKCoordinateSpanMake(2, 2)
+            let region = MKCoordinateRegionMake(location, span)
+            
+            self.mapView.setRegion(region, animated: true)
+
+            manager.stopUpdatingLocation()
+        }
+    }
+}
 
 // MARK: - Protocol Implemantations
 
 extension AddBookmarkViewController: AddBookmarkViewControllerProtocol {
     
-}
-
-extension AddBookmarkViewController: CLLocationManagerDelegate {
-    
+    func dismissView() {
+        navigationController?.popViewController(animated: true)
+    }
 }

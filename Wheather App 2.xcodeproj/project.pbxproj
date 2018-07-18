@@ -14,8 +14,16 @@
 		85201E4520FC77CA003390FF /* Wheather_App_2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85201E4320FC77CA003390FF /* Wheather_App_2.xcdatamodeld */; };
 		85201E4720FC77CC003390FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85201E4620FC77CC003390FF /* Assets.xcassets */; };
 		85201E4A20FC77CC003390FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85201E4820FC77CC003390FF /* LaunchScreen.storyboard */; };
-		85201E5520FC77CC003390FF /* Wheather_App_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85201E5420FC77CC003390FF /* Wheather_App_2Tests.swift */; };
+		85201E5520FC77CC003390FF /* WeatherModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85201E5420FC77CC003390FF /* WeatherModelTest.swift */; };
 		85201E6020FC77CC003390FF /* Wheather_App_2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85201E5F20FC77CC003390FF /* Wheather_App_2UITests.swift */; };
+		8596949F20FF2B3400BC172A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8596949E20FF2B3400BC172A /* SettingsViewController.swift */; };
+		859694A120FF35DF00BC172A /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859694A020FF35DF00BC172A /* CreditsViewController.swift */; };
+		859694A320FF36B300BC172A /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 859694A220FF36B300BC172A /* index.html */; };
+		859694AC20FF377300BC172A /* RatingPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859694A520FF377300BC172A /* RatingPopUpView.swift */; };
+		859694AD20FF377300BC172A /* RatingPopUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 859694A620FF377300BC172A /* RatingPopUpView.xib */; };
+		859694AE20FF377300BC172A /* RatingPopUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 859694A820FF377300BC172A /* RatingPopUpViewController.xib */; };
+		859694AF20FF377300BC172A /* RatingPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859694A920FF377300BC172A /* RatingPopUpViewController.swift */; };
+		859694B020FF377300BC172A /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859694AB20FF377300BC172A /* RatingControl.swift */; };
 		85C0D68320FC980A00509048 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D67E20FC980A00509048 /* HomePresenter.swift */; };
 		85C0D68420FC980A00509048 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D67F20FC980A00509048 /* HomeViewController.swift */; };
 		85C0D68520FC980A00509048 /* HomeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D68020FC980A00509048 /* HomeProtocols.swift */; };
@@ -76,6 +84,11 @@
 		85C0D86520FCD63C00509048 /* AddBookmarkProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D86020FCD63C00509048 /* AddBookmarkProtocols.swift */; };
 		85C0D86620FCD63C00509048 /* AddBookmarkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D86120FCD63C00509048 /* AddBookmarkInteractor.swift */; };
 		85C0D86720FCD63C00509048 /* AddBookmarkWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D86220FCD63C00509048 /* AddBookmarkWireframe.swift */; };
+		85C0D86E20FE1D5E00509048 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D86920FE1D5E00509048 /* DetailsPresenter.swift */; };
+		85C0D86F20FE1D5E00509048 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D86A20FE1D5E00509048 /* DetailsViewController.swift */; };
+		85C0D87020FE1D5E00509048 /* DetailsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D86B20FE1D5E00509048 /* DetailsProtocols.swift */; };
+		85C0D87120FE1D5E00509048 /* DetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D86C20FE1D5E00509048 /* DetailsInteractor.swift */; };
+		85C0D87220FE1D5E00509048 /* DetailsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C0D86D20FE1D5E00509048 /* DetailsWireframe.swift */; };
 		B53E4B91084A7E3354D23E00 /* Pods_Wheather_App_2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5823F766C84294D124FFF4B7 /* Pods_Wheather_App_2UITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,11 +122,20 @@
 		85201E4920FC77CC003390FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85201E4B20FC77CC003390FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85201E5020FC77CC003390FF /* Wheather App 2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wheather App 2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		85201E5420FC77CC003390FF /* Wheather_App_2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wheather_App_2Tests.swift; sourceTree = "<group>"; };
+		85201E5420FC77CC003390FF /* WeatherModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModelTest.swift; sourceTree = "<group>"; };
 		85201E5620FC77CC003390FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85201E5B20FC77CC003390FF /* Wheather App 2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wheather App 2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85201E5F20FC77CC003390FF /* Wheather_App_2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wheather_App_2UITests.swift; sourceTree = "<group>"; };
 		85201E6120FC77CC003390FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8596949E20FF2B3400BC172A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		859694A020FF35DF00BC172A /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
+		859694A220FF36B300BC172A /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		859694A520FF377300BC172A /* RatingPopUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingPopUpView.swift; sourceTree = "<group>"; };
+		859694A720FF377300BC172A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RatingPopUpView.xib; sourceTree = "<group>"; };
+		859694A820FF377300BC172A /* RatingPopUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingPopUpViewController.xib; sourceTree = "<group>"; };
+		859694A920FF377300BC172A /* RatingPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingPopUpViewController.swift; sourceTree = "<group>"; };
+		859694AA20FF377300BC172A /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/RatingPopUpView.xib; sourceTree = "<group>"; };
+		859694AB20FF377300BC172A /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		85C0D67E20FC980A00509048 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		85C0D67F20FC980A00509048 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		85C0D68020FC980A00509048 /* HomeProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProtocols.swift; sourceTree = "<group>"; };
@@ -174,6 +196,11 @@
 		85C0D86020FCD63C00509048 /* AddBookmarkProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookmarkProtocols.swift; sourceTree = "<group>"; };
 		85C0D86120FCD63C00509048 /* AddBookmarkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookmarkInteractor.swift; sourceTree = "<group>"; };
 		85C0D86220FCD63C00509048 /* AddBookmarkWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookmarkWireframe.swift; sourceTree = "<group>"; };
+		85C0D86920FE1D5E00509048 /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
+		85C0D86A20FE1D5E00509048 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		85C0D86B20FE1D5E00509048 /* DetailsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsProtocols.swift; sourceTree = "<group>"; };
+		85C0D86C20FE1D5E00509048 /* DetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
+		85C0D86D20FE1D5E00509048 /* DetailsWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsWireframe.swift; sourceTree = "<group>"; };
 		8DE7A11C98CEDD4F6A17FADA /* Pods-Wheather App 2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wheather App 2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wheather App 2/Pods-Wheather App 2.debug.xcconfig"; sourceTree = "<group>"; };
 		A9D5EB3D53C66BFB40E32928 /* Pods_Wheather_App_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wheather_App_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE16084404EB7EF75CE28F9C /* Pods-Wheather App 2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wheather App 2UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wheather App 2UITests/Pods-Wheather App 2UITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -223,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				85201E3B20FC77CA003390FF /* Wheather App 2 */,
+				859694A220FF36B300BC172A /* index.html */,
 				85201E5320FC77CC003390FF /* Wheather App 2Tests */,
 				85201E5E20FC77CC003390FF /* Wheather App 2UITests */,
 				85201E3A20FC77CA003390FF /* Products */,
@@ -255,7 +283,7 @@
 		85201E5320FC77CC003390FF /* Wheather App 2Tests */ = {
 			isa = PBXGroup;
 			children = (
-				85201E5420FC77CC003390FF /* Wheather_App_2Tests.swift */,
+				85201E5420FC77CC003390FF /* WeatherModelTest.swift */,
 				85201E5620FC77CC003390FF /* Info.plist */,
 			);
 			path = "Wheather App 2Tests";
@@ -268,6 +296,27 @@
 				85201E6120FC77CC003390FF /* Info.plist */,
 			);
 			path = "Wheather App 2UITests";
+			sourceTree = "<group>";
+		};
+		8596949320FF2AC400BC172A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8596949E20FF2B3400BC172A /* SettingsViewController.swift */,
+				859694A020FF35DF00BC172A /* CreditsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		859694A420FF377300BC172A /* Rating Control */ = {
+			isa = PBXGroup;
+			children = (
+				859694A520FF377300BC172A /* RatingPopUpView.swift */,
+				859694A620FF377300BC172A /* RatingPopUpView.xib */,
+				859694A820FF377300BC172A /* RatingPopUpViewController.xib */,
+				859694A920FF377300BC172A /* RatingPopUpViewController.swift */,
+				859694AB20FF377300BC172A /* RatingControl.swift */,
+			);
+			path = "Rating Control";
 			sourceTree = "<group>";
 		};
 		85C0D67B20FC973C00509048 /* Application */ = {
@@ -286,8 +335,11 @@
 		85C0D67C20FC97E100509048 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				85C0D85D20FCD62900509048 /* AddBookmark */,
+				859694A420FF377300BC172A /* Rating Control */,
+				8596949320FF2AC400BC172A /* Settings */,
 				85C0D67D20FC97EA00509048 /* Home */,
+				85C0D85D20FCD62900509048 /* AddBookmark */,
+				85C0D86820FE1D4800509048 /* Details */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -500,6 +552,18 @@
 			path = AddBookmark;
 			sourceTree = "<group>";
 		};
+		85C0D86820FE1D4800509048 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				85C0D86920FE1D5E00509048 /* DetailsPresenter.swift */,
+				85C0D86A20FE1D5E00509048 /* DetailsViewController.swift */,
+				85C0D86B20FE1D5E00509048 /* DetailsProtocols.swift */,
+				85C0D86C20FE1D5E00509048 /* DetailsInteractor.swift */,
+				85C0D86D20FE1D5E00509048 /* DetailsWireframe.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
 		C90AB78DAFF3660D9BB2966B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -604,6 +668,7 @@
 			knownRegions = (
 				en,
 				Base,
+				tr,
 			);
 			mainGroup = 85201E3020FC77CA003390FF;
 			productRefGroup = 85201E3A20FC77CA003390FF /* Products */;
@@ -622,9 +687,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				859694AD20FF377300BC172A /* RatingPopUpView.xib in Resources */,
+				859694A320FF36B300BC172A /* index.html in Resources */,
 				85C0D7B220FCAB0500509048 /* ADSPopupViewController.xib in Resources */,
 				85C0D7B620FCAB0500509048 /* ADSReachabilityViewController.xib in Resources */,
 				85201E4A20FC77CC003390FF /* LaunchScreen.storyboard in Resources */,
+				859694AE20FF377300BC172A /* RatingPopUpViewController.xib in Resources */,
 				85201E4720FC77CC003390FF /* Assets.xcassets in Resources */,
 				85C0D85920FCADFB00509048 /* Home.storyboard in Resources */,
 				85201E4220FC77CA003390FF /* Main.storyboard in Resources */,
@@ -750,6 +818,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85C0D84D20FCAB0500509048 /* NetworkServiceHelper.swift in Sources */,
+				85C0D87120FE1D5E00509048 /* DetailsInteractor.swift in Sources */,
 				85C0D68320FC980A00509048 /* HomePresenter.swift in Sources */,
 				85C0D7B020FCAB0500509048 /* ADSUtils.swift in Sources */,
 				85C0D7BF20FCAB0500509048 /* ADSView.swift in Sources */,
@@ -758,20 +827,26 @@
 				85C0D7B320FCAB0500509048 /* ADSViewController.swift in Sources */,
 				85C0D7AA20FCAB0500509048 /* ADSColorExtensions.swift in Sources */,
 				85C0D7A420FCAB0500509048 /* ADSTextFieldExtensions.swift in Sources */,
+				85C0D86F20FE1D5E00509048 /* DetailsViewController.swift in Sources */,
 				85C0D7AD20FCAB0500509048 /* ADSNSObjectExtensions.swift in Sources */,
 				85C0D7A820FCAB0500509048 /* ADSLabelExtensions.swift in Sources */,
 				85C0D7B420FCAB0500509048 /* ADSTabBarController.swift in Sources */,
 				85C0D7B920FCAB0500509048 /* ADSCollectionView.swift in Sources */,
 				85C0D7A920FCAB0500509048 /* ADSViewControllerExtensions.swift in Sources */,
+				859694B020FF377300BC172A /* RatingControl.swift in Sources */,
 				85C0D68520FC980A00509048 /* HomeProtocols.swift in Sources */,
 				85C0D69220FCAAAE00509048 /* BaseWireframe.swift in Sources */,
 				85C0D7B120FCAB0500509048 /* ADSPopupViewController.swift in Sources */,
 				85C0D85C20FCBCDE00509048 /* WeatherModel.swift in Sources */,
 				85C0D7AE20FCAB0500509048 /* ADSStringExtensions.swift in Sources */,
 				85C0D7A620FCAB0500509048 /* ADSStoryboardExtensions.swift in Sources */,
+				859694AF20FF377300BC172A /* RatingPopUpViewController.swift in Sources */,
 				85C0D7BA20FCAB0500509048 /* ADSImageView.swift in Sources */,
+				8596949F20FF2B3400BC172A /* SettingsViewController.swift in Sources */,
 				85C0D84C20FCAB0500509048 /* UIStoryboardExtensions.swift in Sources */,
+				859694A120FF35DF00BC172A /* CreditsViewController.swift in Sources */,
 				85201E3D20FC77CA003390FF /* AppDelegate.swift in Sources */,
+				85C0D87220FE1D5E00509048 /* DetailsWireframe.swift in Sources */,
 				85C0D7BD20FCAB0500509048 /* ADSTextField.swift in Sources */,
 				85C0D86420FCD63C00509048 /* AddBookmarkViewController.swift in Sources */,
 				85C0D7B520FCAB0500509048 /* ADSNavigationController.swift in Sources */,
@@ -793,9 +868,11 @@
 				85C0D7AF20FCAB0500509048 /* ADSDateExtensions.swift in Sources */,
 				85C0D7BB20FCAB0500509048 /* ADSButton.swift in Sources */,
 				85C0D7A520FCAB0500509048 /* ADSNibExtensions.swift in Sources */,
+				859694AC20FF377300BC172A /* RatingPopUpView.swift in Sources */,
 				85C0D68E20FCAAAE00509048 /* BaseViewController.swift in Sources */,
 				85C0D86620FCD63C00509048 /* AddBookmarkInteractor.swift in Sources */,
 				85C0D85520FCAB0500509048 /* ServiceResult.swift in Sources */,
+				85C0D86E20FE1D5E00509048 /* DetailsPresenter.swift in Sources */,
 				85C0D85720FCAB0500509048 /* CoreDataServiceProtocol.swift in Sources */,
 				85C0D69120FCAAAE00509048 /* BaseInteractor.swift in Sources */,
 				85C0D7C020FCAB0500509048 /* ADSTextView.swift in Sources */,
@@ -805,6 +882,7 @@
 				85C0D7B720FCAB0500509048 /* ADSReachabilityViewController.swift in Sources */,
 				85C0D68420FC980A00509048 /* HomeViewController.swift in Sources */,
 				85C0D85620FCAB0500509048 /* CoreDataService.swift in Sources */,
+				85C0D87020FE1D5E00509048 /* DetailsProtocols.swift in Sources */,
 				85C0D7A320FCAB0500509048 /* ADSTextViewExtensions.swift in Sources */,
 				85C0D7A720FCAB0500509048 /* ADSTableViewExtensions.swift in Sources */,
 				85C0D85120FCAB0500509048 /* BaseModel.swift in Sources */,
@@ -815,7 +893,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85201E5520FC77CC003390FF /* Wheather_App_2Tests.swift in Sources */,
+				85201E5520FC77CC003390FF /* WeatherModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -857,6 +935,15 @@
 				85201E4920FC77CC003390FF /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		859694A620FF377300BC172A /* RatingPopUpView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				859694A720FF377300BC172A /* Base */,
+				859694AA20FF377300BC172A /* tr */,
+			);
+			name = RatingPopUpView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

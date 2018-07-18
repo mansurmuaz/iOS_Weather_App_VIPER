@@ -26,14 +26,16 @@ class CoreDataService: CoreDataServiceProtocol {
         return false
     }
 
-    func delete(managedObject _: NSManagedObject) -> Bool {
+    func delete(location: Location) {
+        
+        let context = managedObjectContext
+        context.delete(location)
+        
         do {
-            try managedObjectContext.save()
-
-            return true
-        } catch {}
-
-        return false
+            try context.save()
+        } catch {
+            print("Error while deleting location")
+        }
     }
 
     // MARK: - CoreData Stack
@@ -43,50 +45,16 @@ class CoreDataService: CoreDataServiceProtocol {
         return urls[urls.count - 1]
     }()
 
-    private lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = Bundle.main.url(forResource: "MACFitDataModel", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOf: modelURL)!
-    }()
-
-    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.appendingPathComponent("MACFitDataModel")
-        var failureReason = "There was an error creating or loading the application's saved data."
-        do {
-            let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-        } catch {
-            var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject?
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject?
-
-            dict[NSUnderlyingErrorKey] = error as NSError
-            let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
-            abort()
-        }
-
-        return coordinator
-    }()
 
     lazy var managedObjectContext: NSManagedObjectContext = {
 
         var managedObjectContext: NSManagedObjectContext?
-        //        if #available(iOS 10.0, *) {
-        //            managedObjectContext = self.persistentContainer.viewContext
-        //        } else {
-        let coordinator = self.persistentStoreCoordinator
-        managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedObjectContext?.persistentStoreCoordinator = coordinator
-
-        //        }
+            managedObjectContext = self.persistentContainer.viewContext
         return managedObjectContext!
     }()
 
-    // iOS-10
-    @available(iOS 10.0, *)
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "MACFitDataModel")
+        let container = NSPersistentContainer(name: "Wheather_App_2")
         container.loadPersistentStores(completionHandler: { _, error in
             if let error = error as NSError? {
 
@@ -108,6 +76,23 @@ class CoreDataService: CoreDataServiceProtocol {
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
                 abort()
             }
+        }
+    }
+    
+    func fetchLocations() -> [Location]? {
+        let context = managedObjectContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            if let locationsData = try context.fetch(request) as? [Location] {
+                return locationsData
+            } else {
+                return nil
+            }
+        } catch {
+            print("Error while fetching data")
+            return nil
         }
     }
 }

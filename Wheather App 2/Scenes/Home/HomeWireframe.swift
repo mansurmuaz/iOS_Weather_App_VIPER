@@ -16,7 +16,7 @@ class HomeWireframe: BaseWireframe {
         let viewController: HomeViewController = UIStoryboard.home.instantiateViewController()
         let navigationController = ADSNavigationController(rootViewController: viewController)
         navigationController.changeNavigationBarType(.black)
-        let interactor = HomeInteractor(networkService: NetworkService.sharedInstance)
+        let interactor = HomeInteractor(networkService: NetworkService.sharedInstance, coreDataService: CoreDataService.sharedInstance)
         
         let presenter = HomePresenter(viewController: viewController, interactor: interactor, delegate: delegate, extras: extras)
         

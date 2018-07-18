@@ -21,6 +21,9 @@ class HomePresenter: BasePresenter {
     // MARK: - Extras
     
     // MARK: - Properties
+    var locations: [Location?] = []
+    var bookmarkWeathers: [WeatherModel?] = []
+    var displayingBookmarkWeathers: [WeatherModel?] = []
     
     // MARK: - Initialization
     
@@ -44,14 +47,91 @@ class HomePresenter: BasePresenter {
 
 extension HomePresenter: HomePresenterViewProtocol {
     
+    func getLocationAt(index: Int) -> Location? {
+        
+        if let locationIndex = bookmarkWeathers.index(where: { (weather) -> Bool in
+            weather === displayingBookmarkWeathers[index]
+        }) {
+            if locationIndex <= locations.count {
+                return locations[locationIndex]
+            }
+        }
+        return nil
+    }
+    
+    func deleteBookmark(index: Int) {
+        
+        if let weatherIndex = bookmarkWeathers.index(where: { (weather) -> Bool in
+            weather === displayingBookmarkWeathers[index]
+        }) {
+            
+            if let location = locations[weatherIndex] {
+                interactor.deleteLocation(location: location)
+                locations.remove(at: weatherIndex)
+                bookmarkWeathers.remove(at: weatherIndex)
+                displayingBookmarkWeathers.remove(at: index)
+                
+                let indexPath = IndexPath(row: index, section: 0)
+                viewController.deleteTableRow(indexPaths: [indexPath])
+            }
+        }
+
+        //tableView.deleteRows(at: [indexPath], with: .fade)
+        
+    }
+    
+    func filterBookmarks(searchText: String) {
+        guard !searchText.isEmpty else {
+            displayingBookmarkWeathers = bookmarkWeathers
+            viewController.reloadTableView()
+            return
+        }
+        displayingBookmarkWeathers = bookmarkWeathers.filter({ (weather) -> Bool in
+            return (weather?.name.lowercased().contains(searchText.lowercased())) ?? false
+        })
+        viewController.reloadTableView()
+    }
+    
+    func getBookmarkAt(index: Int) -> WeatherModel? {
+        
+        if index < displayingBookmarkWeathers.count {
+            return displayingBookmarkWeathers[index]
+        }
+        return nil
+    }
+    
+    func getBookmarks() {
+        interactor.getBookmarks()
+    }
+    
     func getCurrrentWeather(lat: Double, lon: Double) {
         interactor.getCurrrentWeather(lat: lat, lon: lon)
+    }
+    
+    func getBookmarksCount() -> Int {
+        return displayingBookmarkWeathers.count
     }
 }
 
 // MARK: Interactor Protocol
 
 extension HomePresenter: HomePresenterInteractorProtocol {
+    
+    func addToBookmarkWeathers(weather: WeatherModel, index: Int) {
+        if bookmarkWeathers.isEmpty || bookmarkWeathers.count < locations.count {
+            bookmarkWeathers = locations.map({ (_) -> WeatherModel? in
+                return nil
+            })
+        }
+        bookmarkWeathers[index] = weather
+        displayingBookmarkWeathers = bookmarkWeathers
+        viewController.reloadTableView()
+    }
+    
+    func getBookmarkWeathers(bookmarks: [Location]) {
+        locations = bookmarks
+        interactor.fetchBookmarkWeathers(bookmarks: bookmarks)
+    }
     
     func setCurrentWeather(currentWeather: WeatherModel) {
         viewController.setCurrentWeatherLabel(currentWeather: currentWeather)
