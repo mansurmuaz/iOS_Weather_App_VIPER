@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RatingPopUpView" customModule="Weather_App" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelButton" destination="DDo-9K-YM0" id="9gx-tL-SU9"/>
+                <outlet property="popUpView" destination="iN0-l3-epB" id="qgL-Pd-BLB"/>
+                <outlet property="ratingControl" destination="BeU-XI-Sa9" id="afI-12-QAk"/>
+                <outlet property="sendButton" destination="6h0-hy-9VI" id="PZm-cA-luR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="174"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnm-qF-YTt">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="174.5"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="F9O-2N-iDh">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="174.5"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BeU-XI-Sa9" customClass="RatingControl" customModule="Weather_App" customModuleProvider="target">
+                                <rect key="frame" x="24" y="62.5" width="252" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="8RP-eU-pyp"/>
+                                    <constraint firstAttribute="width" constant="252" id="Q42-2q-nNG"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starCount">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="starSize">
+                                        <size key="value" width="44" height="44"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you want do review our app?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTi-nl-eOv">
+                                <rect key="frame" x="25" y="22" width="250" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.24313725489999999" green="0.24313725489999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="MEi-oQ-8St">
+                                <rect key="frame" x="44" y="123" width="212" height="36"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDo-9K-YM0">
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="0.24313725489999999" green="0.24313725489999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-hy-9VI">
+                                        <rect key="frame" x="164" y="0.0" width="48" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" red="0.24313725489999999" green="0.24313725489999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="BeU-XI-Sa9" firstAttribute="top" secondItem="pTi-nl-eOv" secondAttribute="bottom" constant="20" id="EhM-e0-gZJ"/>
+                            <constraint firstItem="pTi-nl-eOv" firstAttribute="top" secondItem="F9O-2N-iDh" secondAttribute="top" constant="22" id="OAo-FF-Os9"/>
+                            <constraint firstItem="pTi-nl-eOv" firstAttribute="centerX" secondItem="F9O-2N-iDh" secondAttribute="centerX" id="OZT-yz-ibN"/>
+                            <constraint firstItem="BeU-XI-Sa9" firstAttribute="centerX" secondItem="F9O-2N-iDh" secondAttribute="centerX" id="Ta5-pt-3kz"/>
+                            <constraint firstItem="MEi-oQ-8St" firstAttribute="top" secondItem="BeU-XI-Sa9" secondAttribute="bottom" constant="16.5" id="ZO8-MN-Vo5"/>
+                            <constraint firstAttribute="bottom" secondItem="MEi-oQ-8St" secondAttribute="bottom" constant="15.5" id="id0-0T-3tw"/>
+                            <constraint firstItem="MEi-oQ-8St" firstAttribute="centerX" secondItem="F9O-2N-iDh" secondAttribute="centerX" id="kDH-hW-zv7"/>
+                        </constraints>
+                    </view>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="qWc-2X-7EO"/>
+                    </constraints>
+                    <blurEffect style="light"/>
+                </visualEffectView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="mnm-qF-YTt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ODZ-0x-3zI"/>
+                <constraint firstItem="mnm-qF-YTt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dhy-h3-g66"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="24.5" y="269.5"/>
+        </view>
+    </objects>
+</document>

@@ -8,7 +8,7 @@
 
 import XCTest
 
-class Wheather_App_2UITests: XCTestCase {
+class WheatherApp2UITests: XCTestCase {
         
     override func setUp() {
         super.setUp()
